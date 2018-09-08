@@ -165,3 +165,4 @@ kafka-zookeeper.yaml
 kafka-zookeeper-openshift.yaml
 nats.yaml
 kinesis.yaml
+docker/runtime/apl/dyalog-installation/dyalog-unicode_17.0.33366_amd64.zip

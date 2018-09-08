@@ -1,0 +1,8 @@
+﻿DyalogBuild: 0.1
+ID         : kubelessapl, Version=0.1
+Description: Simple JSON Web Service
+Defaults   : ⎕IO←⎕ML←1
+TARGET     : Distribution/kubelessapl.dws
+
+APL   : Source/*.dyalog, Target=#
+LX    : kubeless
