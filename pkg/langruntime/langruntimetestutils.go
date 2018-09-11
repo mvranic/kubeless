@@ -15,6 +15,7 @@ func AddFakeConfig(clientset *fake.Clientset) {
 		{
 			"ID": "apl",
 			"depName": "requirements.txt",
+			"compiled": false,
 			"versions": [
 				{
 					"name": "apl17.0",
