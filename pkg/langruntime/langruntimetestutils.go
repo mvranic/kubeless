@@ -13,6 +13,20 @@ func AddFakeConfig(clientset *fake.Clientset) {
 
 	runtimeImages := `[
 		{
+			"ID": "apl",
+			"depName": "requirements.txt",
+			"versions": [
+				{
+					"name": "apl17.0",
+					"version": "17.0",
+					"initImage": "ubuntu:17.10",
+					"runtimeImage": "localhost:5000/kubelessdyaapl:17.0",
+//					"imagePullSecrets": [{"ImageSecret": "p1"}, {"ImageSecret": "p2"}]
+				},
+			],
+			"fileNameSuffix": ".dyalog"
+		},
+		{
 			"ID": "python",
 			"depName": "requirements.txt",
 			"versions": [
