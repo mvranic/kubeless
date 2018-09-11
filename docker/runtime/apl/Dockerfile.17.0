@@ -40,7 +40,7 @@ RUN pip install bottle==0.12.13 cherrypy==8.9.1 wsgi-request-logger prometheus_c
 
 WORKDIR /
 #ADD kubeless.py .
-ADD kubelessapl/Distribution/kubeless.dws .
+ADD Distribution/kubelessapl.dws /kubelessapl/
 
 RUN git clone https://github.com/mvranic/JSONServer.git /JSONServer # Markos JSON Server with thread control.
 #ADD JSONServer.dws /JSONServer/Distribution/

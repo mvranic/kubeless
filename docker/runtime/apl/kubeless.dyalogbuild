@@ -4,5 +4,5 @@ Description: Simple JSON Web Service
 Defaults   : ⎕IO←⎕ML←1
 TARGET     : Distribution/kubelessapl.dws
 
-APL   : Source/*.dyalog, Target=#
+APL   : kubelessapl/*.dyalog, Target=#
 LX    : kubeless
