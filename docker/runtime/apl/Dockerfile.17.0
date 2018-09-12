@@ -36,7 +36,8 @@ RUN cd /dyalog && \
 #RUN python ./get-pip.py
 
 # prometheus support
-RUN pip install bottle==0.12.13 cherrypy==8.9.1 wsgi-request-logger prometheus_client
+# This look likes only for phyton:
+# RUN pip install bottle==0.12.13 cherrypy==8.9.1 wsgi-request-logger prometheus_client
 
 WORKDIR /
 #ADD kubeless.py .
