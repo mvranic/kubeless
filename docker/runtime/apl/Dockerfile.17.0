@@ -38,15 +38,17 @@ RUN cd /dyalog && \
 # prometheus support
 # This look likes only for phyton:
 # RUN pip install bottle==0.12.13 cherrypy==8.9.1 wsgi-request-logger prometheus_client
-
+RUN mkdir /.dyalog
+RUN chmod -R 777 /.dyalog
 WORKDIR /
-#ADD kubeless.py .
+
 ADD Distribution/kubelessapl.dws /kubelessapl/
 
 RUN git clone https://github.com/mvranic/JSONServer.git /JSONServer # Markos JSON Server with thread control.
 #ADD JSONServer.dws /JSONServer/Distribution/
 
 ADD aplcode /aplcode
+RUN chmod -R 777 /aplcode
 
 ADD entry.sh /scripts/
 RUN sed -i -e 's/\r$//' /scripts/entry.sh

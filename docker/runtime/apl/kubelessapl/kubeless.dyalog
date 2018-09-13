@@ -1,16 +1,25 @@
- kubeless;empty;getenv;modename;_getenv;folder;aplfile;fnname;timeout;port;lx;server
+kubeless;empty;getenv;modename;_getenv;folder;aplfile;fnname;timeout;port;lx;server;nr
 ⍝ Init APL runtime using JSON server.
 
 ⍝ Todo: Integration with prometius.
 
+ ⎕←'Start with kubeless'
+
  empty←0∊⍴
  _getenv←{2 ⎕NQ'.' 'GetEnvironment'⍵}
 
- modename←_getenv'MOD_NAME'
  folder←'/aplcode'
+ ⎕←'Folder with apl code:' folder
+ modename←_getenv'MOD_NAME'
+ ⎕←'MOD_NAME:'modename
+⍝ Todo: This should be changed. 
  aplfile←'/kubeless/',modename,'.dyalog'
- folder ⎕NCOPY aplfile
+ 
+ folder ⎕NCOPY aplfile 
+⍝ nr←⎕NGET aplfile
+⍝ 'aplcode'⎕FX nr
  fnname←_getenv'FUNC_HANDLER'
+ ⎕←'FUNC_HANDLER:'fnname
  port←_getenv'FUNC_PORT'
  timeout←_getenv'FUNC_TIMEOUT'
 
@@ -19,8 +28,17 @@
  :EndIf
 
  port timeout←⍎¨port timeout
-  
-⎕CY'/JSONServer/Distribution/JSONServer.dws'
+ 
+ ⎕←'Making HandlerWrapper:'
+ nr←'res←HandlerWrapper arg'  '⍝ Handler wrapper.'   ('⎕←''Start handler wrapper for "',fnname,'".''')   ('res←(⍎''',fnname,''')arg')   ('⎕←''Stop handler wrapper for "',fnname,'".''' )
+ ⎕←'nr:'
+ ⎕←nr
+ (⊂nr)⎕NPUT folder,'/HandlerWrapper.dyalog'
+ ⍝⎕←nr
+⍝ fn←'aplcode'⎕FX nr
+⍝ ⎕←'Handler "',fn,'" is ready.'
+
+ ⎕CY'/JSONServer/Distribution/JSONServer.dws'
 
  server←⎕NEW #.JSONServer
  server.Port←port
@@ -28,8 +46,21 @@
  server.CodeLocation←folder
  server.Threaded←0
  server.AllowHttpGet←1
- server.Loging←1
+ server.Logging←1
+ server.Handler←'HandlerWrapper'
+
+ ⎕←'server.Port' server.Port
+ ⎕←'server.Timeout' server.Timeout
+ ⎕←'server.CodeLocation' server.CodeLocation
+ ⎕←'server.Threaded' server.Threaded
+ ⎕←'server.AllowHttpGet' server.AllowHttpGet
+ ⎕←'server.Logging' server.Logging
+ ⎕←'server.Handler' server.Handler
+
+ ⎕←'Starting server'
 
  server.Start
+ 
+⍝ ⎕OFF
 
- ⎕OFF
+ ⎕←'Stoped server'
