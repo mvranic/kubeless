@@ -30,7 +30,7 @@ kubeless;empty;getenv;modename;_getenv;folder;aplfile;fnname;timeout;port;lx;ser
  port timeout←⍎¨port timeout
  
  ⎕←'Making HandlerWrapper:'
- nr←'res←HandlerWrapper arg'  '⍝ Handler wrapper.'   ('⎕←''Start handler wrapper for "',fnname,'".''')   ('res←(⍎''',fnname,''')arg')   ('⎕←''Stop handler wrapper for "',fnname,'".''' )
+ nr←'res←HandlerWrapper arg'  '⍝ Handler wrapper (note from JSON server is not send context).'   ('⎕←''Start handler wrapper for "',fnname,'".''')   ('res←(⍎''',fnname,''')arg')   ('⎕←''Stop handler wrapper for "',fnname,'".''' )
  ⎕←'nr:'
  ⎕←nr
  (⊂nr)⎕NPUT folder,'/HandlerWrapper.dyalog'
@@ -48,6 +48,7 @@ kubeless;empty;getenv;modename;_getenv;folder;aplfile;fnname;timeout;port;lx;ser
  server.AllowHttpGet←1
  server.Logging←1
  server.Handler←'HandlerWrapper'
+ server.HtmlInterface←0
 
  ⎕←'server.Port' server.Port
  ⎕←'server.Timeout' server.Timeout
@@ -56,6 +57,7 @@ kubeless;empty;getenv;modename;_getenv;folder;aplfile;fnname;timeout;port;lx;ser
  ⎕←'server.AllowHttpGet' server.AllowHttpGet
  ⎕←'server.Logging' server.Logging
  ⎕←'server.Handler' server.Handler
+ ⎕←'server.HtmlInterface' server.HtmlInterface
 
  ⎕←'Starting server'
 
