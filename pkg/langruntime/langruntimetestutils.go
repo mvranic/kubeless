@@ -10,7 +10,8 @@ import (
 
 // AddFakeConfig initializes configmap for unit tests with fake configuration.
 func AddFakeConfig(clientset *fake.Clientset) {
-
+// In apl is used local docker repository and it is removed:
+//					"imagePullSecrets": [{"ImageSecret": "p1"}, {"ImageSecret": "p2"}]
 	runtimeImages := `[
 		{
 			"ID": "apl",
@@ -21,9 +22,8 @@ func AddFakeConfig(clientset *fake.Clientset) {
 					"name": "apl17.0",
 					"version": "17.0",
 					"initImage": "bitnami/minideb-runtimes:jessie",
-					"runtimeImage": "localhost:5000/kubelessdyaapl:17.0",
-//					"imagePullSecrets": [{"ImageSecret": "p1"}, {"ImageSecret": "p2"}]
-				},
+					"runtimeImage": "localhost:5000/kubelessdyaapl:17.0"
+				}
 			],
 			"fileNameSuffix": ".dyalog"
 		},

@@ -87,9 +87,9 @@ local runtime_images ='[
       {
         "name": "apl17.0",
         "version": "17.0",
-        "initImage": "ubuntu:17.10",
-        "runtimeImage": "localhost:5000/kubelessdyaapl:17.0",
-      },
+        "initImage": "bitnami/minideb-runtimes:jessie",
+        "runtimeImage": "localhost:5000/kubelessdyaapl:17.0"
+      }
     ],
     "fileNameSuffix": ".dyalog",
     "depName": "requirements.txt"
