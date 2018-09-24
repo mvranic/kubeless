@@ -11,7 +11,7 @@ RUN install_packages build-essential ca-certificates curl git libbz2-1.0 libc6 l
 RUN apt-get update && \
 	apt-get install -y apt-utils
 
-# install Dyalog APL
+# Install Dyalog APL.
 RUN apt-get install -y unzip 
 
 ADD dyalog-installation /dyalog
@@ -21,23 +21,11 @@ RUN cd /dyalog && \
 	find /opt/mdyalog -name make_scripts -exec {} \; && \
 	rm -rf /dyalog
 
-# Install required system packages and dependencies
-#RUN install_packages build-essential ca-certificates curl git libbz2-1.0 libc6 libncurses5 libreadline6 libsqlite3-0 libssl1.0.0 libtinfo5 pkg-config unzip wget zlib1g
-#RUN wget -nc -P /tmp/bitnami/pkg/cache/ https://downloads.bitnami.com/files/stacksmith/python-3.6.3-0-linux-x64-debian-8.tar.gz && \
-#    echo "efbf832408cf62b6a2fb4c44010252cfe374528f22bc2a7d2b6240512a77322b  /tmp/bitnami/pkg/cache/python-3.6.3-0-linux-x64-debian-8.tar.gz" | sha256sum -c - && \
-#    tar -zxf /tmp/bitnami/pkg/cache/python-3.6.3-0-linux-x64-debian-8.tar.gz -P --transform 's|^[^/]*/files|/opt/bitnami|' --wildcards '*/files' && \
-#    rm -rf /tmp/bitnami/pkg/cache/python-3.6.3-0-linux-x64-debian-8.tar.gz
-
-#ENV BITNAMI_APP_NAME="apl" \
-#    BITNAMI_IMAGE_VERSION="3.6.3-r0" \
-#    PATH="/opt/bitnami/python/bin:$PATH"
-
-#RUN curl https://bootstrap.pypa.io/get-pip.py --output get-pip.py
-#RUN python ./get-pip.py
-
 # prometheus support
 # This look likes only for phyton:
 # RUN pip install bottle==0.12.13 cherrypy==8.9.1 wsgi-request-logger prometheus_client
+
+# Temporary Dyalog APL files.
 RUN mkdir /.dyalog
 RUN chmod -R 777 /.dyalog
 WORKDIR /
@@ -45,7 +33,6 @@ WORKDIR /
 ADD Distribution/kubelessapl.dws /kubelessapl/
 
 RUN git clone https://github.com/mvranic/JSONServer.git /JSONServer # Markos JSON Server with thread control.
-#ADD JSONServer.dws /JSONServer/Distribution/
 
 ADD aplcode /aplcode
 RUN chmod -R 777 /aplcode
@@ -55,6 +42,4 @@ RUN sed -i -e 's/\r$//' /scripts/entry.sh
 
 USER 1000
 
-#CMD ["python", "/kubeless.py"]
-# Loock if you can directly execute APL function from file.
 CMD ["/scripts/entry.sh"]
