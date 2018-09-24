@@ -11,9 +11,9 @@ RUN install_packages build-essential ca-certificates curl git libbz2-1.0 libc6 l
 RUN apt-get update && \
 	apt-get install -y apt-utils
 
-# Install Dyalog APL.
 RUN apt-get install -y unzip 
 
+# Install Dyalog APL:
 ADD dyalog-installation /dyalog
 RUN cd /dyalog && \
 	unzip *.zip && \
