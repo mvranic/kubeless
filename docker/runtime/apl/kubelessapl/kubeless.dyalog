@@ -12,12 +12,9 @@ kubeless;empty;getenv;modename;_getenv;folder;aplfile;fnname;timeout;port;lx;ser
  ⎕←'Folder with apl code:' folder
  modename←_getenv'MOD_NAME'
  ⎕←'MOD_NAME:'modename
-⍝ Todo: This should be changed. 
  aplfile←'/kubeless/',modename,'.dyalog'
- 
  folder ⎕NCOPY aplfile 
-⍝ nr←⎕NGET aplfile
-⍝ 'aplcode'⎕FX nr
+
  fnname←_getenv'FUNC_HANDLER'
  ⎕←'FUNC_HANDLER:'fnname
  port←_getenv'FUNC_PORT'
@@ -30,13 +27,15 @@ kubeless;empty;getenv;modename;_getenv;folder;aplfile;fnname;timeout;port;lx;ser
  port timeout←⍎¨port timeout
  
  ⎕←'Making HandlerWrapper:'
- nr←'res←HandlerWrapper arg'  '⍝ Handler wrapper (note from JSON server is not send context).'   ('⎕←''Start handler wrapper for "',fnname,'".''')   ('res←(⍎''',fnname,''')arg')   ('⎕←''Stop handler wrapper for "',fnname,'".''' )
+ nr←⍬
+ nr,←⊂' res←HandlerWrapper arg'  
+ nr,←⊂' ⍝ Handler wrapper (note from JSON server is not send context).'  
+ nr,←⊂ '⎕←''Start execution handler wrapper for "',fnname,'".'''
+ nr,←⊂' res←(⍎''',fnname,''')arg'
+ nr,←⊂' ⎕←''Finished execution handler wrapper for "',fnname,'".''' 
  ⎕←'nr:'
  ⎕←nr
  (⊂nr)⎕NPUT folder,'/HandlerWrapper.dyalog'
- ⍝⎕←nr
-⍝ fn←'aplcode'⎕FX nr
-⍝ ⎕←'Handler "',fn,'" is ready.'
 
  ⎕CY'/JSONServer/Distribution/JSONServer.dws'
 
@@ -50,6 +49,7 @@ kubeless;empty;getenv;modename;_getenv;folder;aplfile;fnname;timeout;port;lx;ser
  server.Handler←'HandlerWrapper'
  server.HtmlInterface←0
 
+ ⎕←'JSONServer argumnets:'
  ⎕←'server.Port' server.Port
  ⎕←'server.Timeout' server.Timeout
  ⎕←'server.CodeLocation' server.CodeLocation
